@@ -1,0 +1,68 @@
+{% extends "layout.html"%}
+{%block content1%}
+<script>
+    window.onload = function () {
+        var lista1 = [];
+    };
+</script>
+<div class="row">
+    <div>
+        <form class="form-control-sm" name="form1" action="/resultado" method="post">
+            <legend class="text-center" style="color: black;">Entrada</legend>
+            <div class="control-group">
+                <label for="txtOperacion" class="control-label">Operacion</label>
+                <div class="controls">
+                    <input type="text" id="txtOperacion" name="txtOperacion" placeholder="Operacion" value="">
+                </div>
+                <div style="display:none;">
+                    <input type="text" id="txtCadena" name="txtCadena">
+                </div>
+                <div>
+                    <button type="button" onclick="agregar()" class="btn btn-default btn-info">
+                        <icon class="icon-plus icon-white"></icon> Agregar
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="controls">
+                    <button type="submit" class="btn btn-default btn-danger">
+                        <icon class="icon-play icon-white"></icon> Procesar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var lista = [];
+    function agregar() {
+        var operacion = document.getElementById("txtOperacion").value;
+        var position = operacion.indexOf("+");
+        var position1 = operacion.indexOf("-");
+        var position2 = operacion.indexOf("*");
+        var position3 = operacion.indexOf("/");
+        var splitString, joinedString = "";
+        if (position > 0) {
+            splitString = operacion.split("+");
+            joinedString = splitString.join(" + ");
+        }
+        if (position1 > 0) {
+            splitString = operacion.split("-");
+            joinedString = splitString.join(" - ");
+        }
+        if (position2 > 0) {
+            splitString = operacion.split("*");
+            joinedString = splitString.join(" * ");
+        }
+        if (position3 > 0) {
+            splitString = operacion.split("/");
+            joinedString = splitString.join(" / ");
+        }
+        lista.push(joinedString);
+        let input = document.getElementById("txtCadena");
+        input.value = lista;
+        let input1 = document.getElementById("txtOperacion");
+        input1.value = '';
+    }
+</script>
+{%endblock%}
