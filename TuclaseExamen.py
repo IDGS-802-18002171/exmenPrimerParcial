@@ -21,50 +21,50 @@ class TuclaseExamen():
         except:
             return "Error: Too many problems."
         for prob in problems:
-            # Splitting the Problem into separate strings
+            # Separacion de la lista mediante strings 
             separated_problem = prob.split()
             # storing number 1
             number1 = separated_problem[0]
-            # Storing the operator sign
-            operator = separated_problem[1]
+            # Storing signo del operador
+            operador = separated_problem[1]
             # storing number 2
             number2 = separated_problem[2]
-            exp = exception_handling(number1, number2, operator)
+            exp = exception_handling(number1, number2, operador)
             if exp != "":
                 return exp
             no1 = int(number1)
             no2 = int(number2)
-            # space contains the max no. os spaces required.
+            # Espacio obtenido del maximo no. requiriente de espacios.
             space = max(len(number1), len(number2))
-            # For first arithmetic arragement
+            # Primera funcion
             if start == True:
                 line1 += number1.rjust(space + 2)
-                line2 += operator + ' ' + number2.rjust(space)
+                line2 += operador + ' ' + number2.rjust(space)
                 line3 += '-' * (space + 2)
                 if displayMode == True:
-                    if operator == '+':
+                    if operador == '+':
                         line4 += str(no1 + no2).rjust(space + 2)
                     else:
                         line4 += str(no1 - no2).rjust(space + 2)
                 start = False
-            # Other than first arithmetic arragement
+            # Segunda funcion
             else:
                 line1 += number1.rjust(space + 6)
-                line2 += operator.rjust(5) + ' ' + number2.rjust(space)
+                line2 += operador.rjust(5) + ' ' + number2.rjust(space)
                 line3 += side_space + '-' * (space + 2)
                 if displayMode == True:
-                    if operator == '+':
+                    if operador == '+':
                         line4 += side_space + str(no1 + no2).rjust(space + 2)
                     else:
                         line4 += side_space + str(no1 - no2).rjust(space + 2)
-        # displayMode is Ture then append line4
+        # displayMode es cerdadero pegarle la linea 4
         if displayMode == True:
             return line1 + '\n' + line2 + '\n' + line3 + '\n' + line4
         return line1 + '\n' + line2 + '\n' + line3
         
 # Exception Handling function
-def exception_handling(number1, number2, operator):
-    # Only digit exception
+def exception_handling(number1, number2, operador):
+    # Excepcion de solo digitos
     try:
         int(number1)
     except:
@@ -73,15 +73,15 @@ def exception_handling(number1, number2, operator):
         int(number2)
     except:
         return "Error: Numbers must only contain digits."
-    # More than 4 digit no. exception
+    # Mas de 4 digitos en una cifra
     try:
         if len(number1) > 4 or len(number2) > 4:
             raise BaseException
     except:
         return "Error: Numbers cannot be more than four digits."
-    # Operator must be + | - exception.
+    # Excepcion del operador sonde solo puede ser + | -
     try:
-        if operator != '+' and operator != '-':
+        if operador != '+' and operador != '-':
             raise BaseException
     except:
         return "Error: Operator must be '+' or '-'."
